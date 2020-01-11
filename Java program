@@ -1,0 +1,79 @@
+import java.io.*;
+public class GreenVision
+{
+    public static void form_receiver()throws IOException
+    {
+        InputStreamReader isr=new InputStreamReader(System.in);
+        BufferedReader br= new BufferedReader(isr);
+        int n=0;
+        System.out.println("Name:");
+        String name=br.readLine();
+        System.out.println("Address");
+        String address=br.readLine();
+        System.out.println("Phone No.");
+        double phoneno=Double.parseDouble(br.readLine());
+        System.out.println("Email Address");
+        String s=br.readLine();
+        System.out.println("Aadhar Number");
+        String aadhar=br.readLine();
+        String type[]= {"Organic waste, E-waste, Toxic waste, Secondhand products, Plastic waste"};
+        while(n==0)
+        {
+        System.out.println("Aadhar Number");
+        aadhar=br.readLine();
+        aadhar=aadhar.trim();
+        try{
+            
+            if((aadhar.length()!=14))
+            {System.out.println("Aadhar Number not Found!");}
+            else 
+            {n++;}
+           }
+        catch(Exception e)
+        {
+            System.out.println("Aadhar Number not Found");
+        }
+        
+        }
+    }
+    public static void form_giver()throws IOException
+    {
+        InputStreamReader isr=new InputStreamReader(System.in);
+        BufferedReader br= new BufferedReader(isr);
+        System.out.println("Name:");
+        String name=br.readLine();
+        System.out.println("Address");
+        String address=br.readLine();
+        System.out.println("Phone No.");
+        double phoneno=Double.parseDouble(br.readLine());
+        System.out.println("Email Address");
+        String s=br.readLine();
+    }
+   public static void main()throws IOException
+   {
+       InputStreamReader isr=new InputStreamReader(System.in);
+       BufferedReader br= new BufferedReader(isr);
+       int choice,choice1;
+       System.out.println("Choose the type of waste:");
+       System.out.println("1. Second Hand Items");
+       System.out.println("2. Organic Waste");
+       System.out.println("3. E-Waste");
+       System.out.println("4. Recyclable Waste");
+       System.out.println("5. Toxic Waste");
+       choice=Integer.parseInt(br.readLine());
+       System.out.println("Are you a:");
+       System.out.println("1.Giver");
+       System.out.println("2.Receiver");
+       choice1=Integer.parseInt(br.readLine());
+       if(choice1==1)
+       {
+           
+          form_receiver();
+          
+        }
+          
+       else
+          form_giver();
+          
+    } 
+}      
