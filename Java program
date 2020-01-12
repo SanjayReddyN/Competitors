@@ -1,7 +1,19 @@
+import java.util.*;
 import java.io.*;
-public class GreenVision
-{
-    public static void form_receiver()throws IOException
+ public class GreenVision1
+ {
+    int secondhand;
+    int organic;
+    int e_waste;
+    int plastic;
+    int toxic;
+    static String object_name[] = new String[100];
+    static int type[]=new int[100];
+    static int fee[] = new int[100];
+    static String phone_no[]=new String[100];
+    static int size[]=new int[100];
+    static int no = 0;
+    public  void form_receiver()throws IOException
     {
         InputStreamReader isr=new InputStreamReader(System.in);
         BufferedReader br= new BufferedReader(isr);
@@ -11,30 +23,76 @@ public class GreenVision
         System.out.println("Address");
         String address=br.readLine();
         System.out.println("Phone No.");
-        double phoneno=Double.parseDouble(br.readLine());
+        String phone_rec= br.readLine();
         System.out.println("Email Address");
         String s=br.readLine();
-        System.out.println("Aadhar Number");
-        String aadhar=br.readLine();
-        String type[]= {"Organic waste, E-waste, Toxic waste, Secondhand products, Plastic waste"};
+        String aadhar;
+        int z=0;
         while(n==0)
         {
         System.out.println("Aadhar Number");
         aadhar=br.readLine();
         aadhar=aadhar.trim();
         try{
-            
+           
             if((aadhar.length()!=14))
-            {System.out.println("Aadhar Number not Found!");}
-            else 
-            {n++;}
+            {System.out.println("Aadhar Number not Found!Please enter again.");
+              z =0;
+            }
+            else
+            {n++;
+             z = 1;
+            }
            }
         catch(Exception e)
         {
             System.out.println("Aadhar Number not Found");
         }
-        
         }
+        int ni;
+        String name1=" ";
+        if (z==1)
+        {
+          for(ni = 0; ni<= no-1 ; ni++)
+         {
+             if(type[ni]==1)
+              name1= "secondhand";
+             else if(type[ni]==2)
+              name1= "organic";
+             else if(type[ni]==3)
+               name1 = "e-waste";
+             else if(type[ni]==4)
+              name1 = "plastic";
+             else if(type[ni]==5)
+              name1= "toxic";
+             if(type[no]==1||type[no]==3)
+              System.out.println((ni+1) + ".     " + object_name[ni] + "     " + name1 + "     " + size[ni]+" pieces      Ph.no " +  phone_no[ni] + "       Rs."+fee[ni]+".00");
+              else
+              System.out.println((ni+1) + ".     " + object_name[ni] + "     " + name1 + "     " + size[ni]+" kg       Ph.no " +  phone_no[ni] + "       Rs."+fee[ni]+".00");
+         }
+         System.out.println("Enter the row number of desired object:");
+         int u= Integer.parseInt(br.readLine());
+         String name2="";
+         if(type[u-1]==1)
+              name2= "secondhand";
+             else if(type[u-1]==2)
+              name2= "organic";
+             else if(type[u-1]==3)
+              name2 = "e-waste";
+             else if(type[u-1]==4)
+              name2 = "plastic";
+             else if(type[u-1]==5)
+              name2 = "toxic";
+             
+              System.out.println("This is your order:");
+         System.out.println((u) + ".     " + object_name[u-1] + "     " + name2 + "     " + size[u-1]+" kg or pieces     Ph.no  " +  phone_no[u-1] + "       Rs."+fee[u-1]+".00");
+         System.out.println("Thank you for your waste conscious effort");
+         object_name[u-1] = "Not available";
+         phone_no[u-1] = "";
+         size[u-1] = 0;
+         fee[u-1] = 0;
+        }
+       
     }
     public static void form_giver()throws IOException
     {
@@ -45,35 +103,159 @@ public class GreenVision
         System.out.println("Address");
         String address=br.readLine();
         System.out.println("Phone No.");
-        double phoneno=Double.parseDouble(br.readLine());
+        phone_no[no]=br.readLine();
         System.out.println("Email Address");
         String s=br.readLine();
     }
-   public static void main()throws IOException
-   {
+    public  void giveaway()throws IOException
+    {
+      InputStreamReader isr=new InputStreamReader(System.in);
+      BufferedReader br= new BufferedReader(isr);
+      System.out.println("Enter what trash you have:");
+      object_name[no]= br.readLine();
+      if(type[no]==1||type[no]==3)
+       System.out.println("Enter no.  of item");
+       else
+       System.out.println("Enter kg.  of item");
+      size[no] = Integer.parseInt(br.readLine());
+      System.out.println("Enter fee(preferably make it free as it may help others)");
+      fee[no] = Integer.parseInt(br.readLine());
+      form_giver();
+      System.out.println("Thank you.We will send the receiver your phone number for contact");
+      no++;
+    }  
+    public void type_waste()throws IOException
+    {
        InputStreamReader isr=new InputStreamReader(System.in);
        BufferedReader br= new BufferedReader(isr);
-       int choice,choice1;
+       int a;
        System.out.println("Choose the type of waste:");
        System.out.println("1. Second Hand Items");
        System.out.println("2. Organic Waste");
        System.out.println("3. E-Waste");
-       System.out.println("4. Recyclable Waste");
+       System.out.println("4. Plastic Waste");
        System.out.println("5. Toxic Waste");
-       choice=Integer.parseInt(br.readLine());
-       System.out.println("Are you a:");
-       System.out.println("1.Giver");
-       System.out.println("2.Receiver");
-       choice1=Integer.parseInt(br.readLine());
-       if(choice1==1)
+       a=Integer.parseInt(br.readLine());
+       System.out.println("What would you like to do?");
+       switch(a)
        {
+           case 1:
+           {
+           System.out.println("Type 1 for recycle and 2 for give away");
+           secondhand=Integer.parseInt(br.readLine());
+           type[no]=1;
+           switch(secondhand)
+           {
+               case 1: System.out.println("To Recycle");
+                       System.out.println("Old books, clothes and other items can be given to factories which recycle them. ");
+               break;
+               case 2: giveaway();
+               break;
+               
+           }
+           }
+           break;
            
-          form_receiver();
-          
-        }
-          
+           case 2:
+           {
+           System.out.println("Type 1 for reuse and 2 for give away");
+           organic=Integer.parseInt(br.readLine());
+           type[no]=2;
+           switch(organic)
+           {
+               case 1: System.out.println("Reuse");
+                      System.out.println("Reuse");
+                       System.out.println("1.Get food caddy");
+                       System.out.println("2.Line the food caddy with compostable starch liner");
+                       System.out.println("3.Extract the starch caddy and place in garden");
+                       System.out.println("4.Add manure");
+                       System.out.println("5.Sprinkle with water");
+               break;
+               case 2: giveaway();
+               break;
+               
+           }
+           break;
+           }
+           case 3:
+           {
+           System.out.println("Type 1 for selling and 2 for give away");
+            e_waste=Integer.parseInt(br.readLine());
+            type[no]=3;
+           switch(e_waste)
+           {
+               case 1: giveaway();
+               break;
+               case 2: giveaway();
+               break;
+           }
+           break;
+           }
+           case 4:
+           {
+           System.out.println("Type 1 for reuse, 2 for give away and 3 for recycling");
+           plastic=Integer.parseInt(br.readLine());
+           type[no]=4;
+           switch(plastic)
+           {
+               case 1: System.out.println("Reuse");
+                        System.out.println("items such as bottles and containers can be reused for future use to prevent excess waste generation");
+               break;
+               case 2: giveaway();
+               break;
+               case 3: System.out.println("Recycle");
+                  System.out.println(" there are two major ways to recycle plastic: (1) mechanical recycling where the plastic is washed, ground into powders and melted, and (2) chemical recycling, where the plastic is broken down into basic components.");
+               break;
+           }
+           break;
+           }
+           case 5:
+           {
+           System.out.println("Type 1 for giveaway ");
+           toxic=Integer.parseInt(br.readLine());
+           type[no]=5;
+           switch(toxic)
+           {
+               case 1: giveaway();
+               break;
+           }
+           
+           }
+       }
+    }
+   
+   public static void main()throws IOException
+   {
+       while(no>-1)
+       {
+         try{
+             Thread.sleep(20000);
+            }catch(InterruptedException e){}
+       System.out.print('\u000C');
+           
+       GreenVision1 obj = new GreenVision1();
+       InputStreamReader isr=new InputStreamReader(System.in);
+       BufferedReader br= new BufferedReader(isr);
+       object_name[no]="";
+       size[no]=0;
+       type[no]=0;
+       phone_no[no]="";
+       fee[no]=0;
+       int choice;
+       System.out.println("Do you:");
+       System.out.println("1.Have waste");
+       System.out.println("2.Want to receive waste");
+       choice=Integer.parseInt(br.readLine());
+       if(choice==1)
+       {
+          obj.type_waste();
+         
+       }  
        else
-          form_giver();
-          
-    } 
-}      
+       {
+          obj.form_receiver();
+       }
+       
+     }
+  }
+}
